@@ -6,5 +6,15 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className
 ) {
-  // your code here
+  var elementStack = [];
+  function findClassName(node) {
+    if (_(node.classList).contains(className)) {
+      elementStack.push(node);
+    }
+    for(var i = 0; i < node.childNodes.length; i++){
+       findClassName(node.childNodes[i]);     
+    } 
+    return elementStack;
+  }
+  return findClassName(document.body);
 };
